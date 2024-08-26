@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+
+// random atria and ventricle bounds
+const int Vmaxwait = 1000;
+const int Vminwait = 300;
+const int Amaxwait = 1000;
+const int Aminwait = 300;
+
+// given timing constraints
+const int TAEI = 800; // atrial escape period
+const int TAVI = 150; // atrio ventricular interval 
+const int TVRP = 150; // ventricular refract. period
+const int TPVARP = 100; // post ventricular atrial refract. preiod
+const int TURI = 400; // upper rate interval
+const int TLRI = AEI + AVI; // lower arte interval
+
+// URI clock
+clock x_URI = 0;</declaration>
+	<template>
+		<name>RV</name>
+		<parameter>broadcast chan &amp;VSense, broadcast chan &amp;VP</parameter>
+		<declaration>clock x;</declaration>
+		<location id="id0" x="0" y="-24">
+			<name x="-10" y="-54">RV</name>
+			<label kind="invariant" x="24" y="-32">x&lt;Vmaxwait</label>
+		</location>
+		<init ref="id0"/>
+		<transition id="id1">
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-24" y="24">x&gt;Vminwait</label>
+			<label kind="synchronisation" x="-24" y="40">VSense!</label>
+			<label kind="assignment" x="-16" y="56">x=0</label>
+			<nail x="-32" y="24"/>
+			<nail x="32" y="24"/>
+		</transition>
+		<transition id="id2">
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="synchronisation" x="-16" y="-104">VP?</label>
+			<label kind="assignment" x="-16" y="-88">x=0</label>
+			<nail x="-32" y="-72"/>
+			<nail x="40" y="-72"/>
+		</transition>
+	</template>
+	<template>
+		<name>RA</name>
+		<parameter>broadcast chan &amp;ASense, broadcast chan &amp;AP</parameter>
+		<declaration>clock x;</declaration>
+		<location id="id3" x="-17" y="-25">
+			<name x="-27" y="-55">RA</name>
+			<label kind="invariant" x="7" y="-33">x&lt;Amaxwait</label>
+		</location>
+		<init ref="id3"/>
+		<transition id="id4">
+			<source ref="id3"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-41" y="23">x&gt;Aminwait</label>
+			<label kind="synchronisation" x="-41" y="39">ASense!</label>
+			<label kind="assignment" x="-33" y="55">x=0</label>
+			<nail x="-49" y="23"/>
+			<nail x="15" y="23"/>
+		</transition>
+		<transition id="id5">
+			<source ref="id3"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="-33" y="-105">AP?</label>
+			<label kind="assignment" x="-33" y="-89">x=0</label>
+			<nail x="-49" y="-73"/>
+			<nail x="23" y="-73"/>
+		</transition>
+	</template>
+	<template>
+		<name>URI</name>
+		<parameter>broadcast chan &amp;VP, broadcast chan &amp;VS</parameter>
+		<location id="id46" x="0" y="-8">
+			<name x="17" y="-16">URI</name>
+		</location>
+		<init ref="id46"/>
+		<transition id="id47">
+			<source ref="id46"/>
+			<target ref="id46"/>
+			<label kind="synchronisation" x="-17" y="34">VS?</label>
+			<label kind="assignment" x="-17" y="51">x_URI=0</label>
+			<nail x="-25" y="34"/>
+			<nail x="25" y="34"/>
+		</transition>
+		<transition id="id48">
+			<source ref="id46"/>
+			<target ref="id46"/>
+			<label kind="synchronisation" x="-17" y="-85">VP?</label>
+			<label kind="assignment" x="-17" y="-68">x_URI=0</label>
+			<nail x="-25" y="-42"/>
+			<nail x="25" y="-42"/>
+		</transition>
+	</template>
+	<template>
+		<name>AVI</name>
+		<parameter>broadcast chan &amp;VP, broadcast chan &amp;VS, broadcast chan &amp;AS</parameter>
+		<declaration>clock x;</declaration>
+		<location id="id49" x="0" y="0">
+			<name x="17" y="-25">IDLE</name>
+		</location>
+		<location id="id50" x="0" y="119">
+			<name x="8" y="119">AVI</name>
+			<label kind="invariant" x="8" y="136">x&lt;=TAVI</label>
+		</location>
+		<location id="id51" x="0" y="-119">
+			<name x="-25" y="-170">WaitURI</name>
+			<label kind="invariant" x="-25" y="-153">x_URI&lt;=TURI</label>
+		</location>
+		<init ref="id49"/>
+		<transition id="id52">
+			<source ref="id50"/>
+			<target ref="id51"/>
+			<label kind="guard" x="8" y="187">x&gt;=TAVI &amp;&amp; x_URI&lt;TURI</label>
+			<nail x="0" y="187"/>
+			<nail x="195" y="187"/>
+			<nail x="195" y="-119"/>
+		</transition>
+		<transition id="id53">
+			<source ref="id50"/>
+			<target ref="id49"/>
+			<label kind="synchronisation" x="102" y="51">VS?</label>
+			<nail x="93" y="119"/>
+			<nail x="93" y="0"/>
+		</transition>
+		<transition id="id54">
+			<source ref="id50"/>
+			<target ref="id49"/>
+			<label kind="guard" x="-212" y="119">x&gt;=TAVI &amp;&amp; x_URI&gt;=TURI</label>
+			<label kind="synchronisation" x="-119" y="102">VP!</label>
+			<nail x="-85" y="119"/>
+			<nail x="-85" y="0"/>
+		</transition>
+		<transition id="id55">
+			<source ref="id51"/>
+			<target ref="id49"/>
+			<label kind="guard" x="51" y="-68">x_URI&gt;=TURI</label>
+			<label kind="synchronisation" x="51" y="-85">VP!</label>
+			<nail x="51" y="-68"/>
+		</transition>
+		<transition id="id56">
+			<source ref="id51"/>
+			<target ref="id49"/>
+			<label kind="synchronisation" x="-76" y="-85">VS?</label>
+			<nail x="-51" y="-68"/>
+		</transition>
+		<transition id="id57">
+			<source ref="id49"/>
+			<target ref="id50"/>
+			<label kind="synchronisation" x="51" y="42">AS?</label>
+			<label kind="assignment" x="51" y="59">x=0</label>
+			<nail x="51" y="59"/>
+		</transition>
+		<transition id="id58">
+			<source ref="id49"/>
+			<target ref="id50"/>
+			<label kind="synchronisation" x="-76" y="42">AV?</label>
+			<label kind="assignment" x="-76" y="59">x=0</label>
+			<nail x="-51" y="59"/>
+		</transition>
+	</template>
+	<template>
+		<name>VRP</name>
+		<parameter>broadcast chan &amp;VS, broadcast chan &amp;VSense, broadcast chan &amp;VP</parameter>
+		<declaration>clock x;</declaration>
+		<location id="id59" x="-238" y="-34">
+			<name x="-248" y="-68">IDLE</name>
+		</location>
+		<location id="id60" x="68" y="-34">
+			<name x="58" y="-68">VRP</name>
+			<label kind="invariant" x="42" y="-85">x&lt;=TVRP</label>
+		</location>
+		<location id="id61" x="-85" y="-34">
+			<name x="-95" y="-68">inter</name>
+			<committed/>
+		</location>
+		<init ref="id59"/>
+		<transition id="id62">
+			<source ref="id61"/>
+			<target ref="id60"/>
+			<label kind="synchronisation" x="-42" y="-51">VS!</label>
+			<label kind="assignment" x="-42" y="-34">x=0</label>
+		</transition>
+		<transition id="id63">
+			<source ref="id59"/>
+			<target ref="id61"/>
+			<label kind="synchronisation" x="-187" y="-51">VSense?</label>
+		</transition>
+		<transition id="id64">
+			<source ref="id60"/>
+			<target ref="id59"/>
+			<label kind="guard" x="-119" y="-161">x&gt;=TVRP</label>
+			<label kind="synchronisation" x="-119" y="-144">VRP_Ex!</label>
+			<nail x="-85" y="-127"/>
+		</transition>
+		<transition id="id65">
+			<source ref="id59"/>
+			<target ref="id60"/>
+			<label kind="synchronisation" x="-102" y="42">VP?</label>
+			<label kind="assignment" x="-102" y="59">x=0</label>
+			<nail x="-85" y="42"/>
+		</transition>
+	</template>
+	<template>
+		<name>PVARP</name>
+		<parameter>broadcast chan &amp;AS, broadcast chan &amp;ASense, broadcast chan &amp;VS, broadcast chan &amp;VP</parameter>
+		<declaration>clock x;</declaration>
+		<location id="id66" x="-51" y="17">
+			<name x="-68" y="34">IDLE</name>
+		</location>
+		<location id="id67" x="-170" y="17">
+			<name x="-187" y="34">ASed</name>
+			<committed/>
+		</location>
+		<location id="id68" x="68" y="17">
+			<name x="51" y="34">PVARP</name>
+			<label kind="invariant" x="52" y="51">x&lt;=TPVARP</label>
+			<committed/>
+		</location>
+		<init ref="id66"/>
+		<transition id="id69">
+			<source ref="id68"/>
+			<target ref="id66"/>
+			<label kind="guard" x="-34" y="-110">x&gt;=TPVARP</label>
+			<label kind="synchronisation" x="-33" y="-92">PVARP_Ex!</label>
+			<nail x="68" y="-76"/>
+			<nail x="-51" y="-75"/>
+		</transition>
+		<transition id="id70">
+			<source ref="id66"/>
+			<target ref="id68"/>
+			<label kind="synchronisation" x="-9" y="60">VP?</label>
+			<label kind="assignment" x="-9" y="77">x=0</label>
+			<nail x="8" y="60"/>
+		</transition>
+		<transition id="id71">
+			<source ref="id66"/>
+			<target ref="id68"/>
+			<label kind="synchronisation" x="-8" y="-59">VS?</label>
+			<label kind="assignment" x="-9" y="-42">x=0</label>
+			<nail x="8" y="-25"/>
+		</transition>
+		<transition id="id72">
+			<source ref="id67"/>
+			<target ref="id66"/>
+			<label kind="synchronisation" x="-119" y="-42">AS!</label>
+			<nail x="-111" y="-25"/>
+		</transition>
+		<transition id="id73">
+			<source ref="id66"/>
+			<target ref="id67"/>
+			<label kind="synchronisation" x="-136" y="60">ASense?</label>
+			<nail x="-111" y="60"/>
+		</transition>
+	</template>
+	<system>// Declaration goes here.
+broadcast chan VSense, VP, VS, ASense, AP, VS;
+broadcast chan ; // monitor signals
+
+
+// Place template instantiations here.
+Random_Ventricle = RV(VSense, VP);
+Random_Atria = RA(ASense, AP);
+
+Con_LRI = LRI();     // out: AP;   in: AS, VS, VP;
+Con_VRP = VRP();     // out: VS;   in: VSense, VP;
+Con_AVI = AVI();     // out: VP;   in: AS, VS, VP;
+Con_URI = URI();     // out: NULL; in: VS, VP;
+Con_PVARP = PVARP(); // out: AS;   in: ASense, VS, VP;
+Con_AEI = AEI();     // out: AP;   in: AS, AP, VS, VP;
+
+// List one or more processes to be composed into a system.
+system Random_Ventricle, Random_Atria, Con_LRI, Con_VRP, Con_AVI, Con_URI, Con_PVARP;
+</system>
+	<queries>
+		<query>
+			<formula>A[] (Monitor_VRP.Ex_Get imply Monitor_VRP.t &gt;= TVRP)
+			</formula>
+			<comment/>
+		</query>
+		<query>
+			<formula>A[] (Monitor_LRI.Detected imply Monitor_LRI.t &lt;= TLRI)
+			</formula>
+			<comment/>
+		</query>
+		<query>
+			<formula>A[] not deadlock
+			</formula>
+			<comment/>
+		</query>
+	</queries>
+</nta>
