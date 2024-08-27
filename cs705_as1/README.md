@@ -31,17 +31,17 @@ const int LRI = AEI + AVI;
 *Figure 3: URI Model*
 
 ### Atrio-Ventricular Interval (AVI)
-
+A-V Interval
 ![AVI_Model](resources/AVI.png)
 *Figure 4: AVI Model*
 
 ### Post Ventricular Atrial Refractory Period (PVARP)
-
+Minimum V-A Interval
 ![PVARP_Model](resources/PVARP.png)
 *Figure 5: PVARP Model*
 
 ### Ventricular Refractory Period (VRP)
-
+Minimum V-V Interval.
 ![VRP_Model](resources/VRP.png)
 *Figure 6: VRP Model*
 
