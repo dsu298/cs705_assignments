@@ -377,7 +377,7 @@ clock x_URI = 0;</declaration>
 		<declaration>clock x;</declaration>
 		<location id="id56" x="-187" y="34">
 			<name x="-229" y="8">LRI</name>
-			<label kind="invariant" x="-306" y="25">x&lt;=TLRI-TAVI</label>
+			<label kind="invariant" x="-263" y="25">x&lt;=TAEI</label>
 		</location>
 		<location id="id57" x="-187" y="-170">
 			<name x="-221" y="-204">ASSensed</name>
@@ -425,7 +425,7 @@ clock x_URI = 0;</declaration>
 		<transition id="id65">
 			<source ref="id56"/>
 			<target ref="id56"/>
-			<label kind="guard" x="-85" y="8">x&gt;=TLRI-TAVI</label>
+			<label kind="guard" x="-85" y="8">x&gt;=TAEI</label>
 			<label kind="synchronisation" x="-84" y="25">AP!</label>
 			<label kind="assignment" x="-85" y="42">x=0</label>
 			<nail x="-93" y="17"/>
@@ -648,114 +648,58 @@ system Random_Ventricle, Random_Atria, Con_LRI, Con_VRP, Con_AVI, Con_URI, Con_P
 </system>
 	<queries>
 		<query>
-			<formula/>
-			<comment>8. The pacemaker can deliver a pacing pulse (VP), where the time interval between this VP and its preceding atrial event is greater than AVI.</comment>
-		</query>
-		<query>
 			<formula>E&lt;&gt; (Monitor_AVI.VPDetected imply Monitor_LRI.t &gt; TAVI)</formula>
-			<comment/>
-			<result outcome="success" type="quality" timestamp="2024-08-27 13:23:58 +1200">
+			<comment>8. The pacemaker can deliver a pacing pulse (VP), where the time interval between this VP and its preceding atrial event is greater than AVI.</comment>
+			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
 			</result>
-		</query>
-		<query>
-			<formula/>
-			<comment/>
-		</query>
-		<query>
-			<formula/>
-			<comment>7. The time interval between two consecutive ventricular events is always less or equal to LRI.</comment>
 		</query>
 		<query>
 			<formula>A[] (Monitor_LRI.VDetected imply Monitor_LRI.t &lt;= TLRI)</formula>
-			<comment/>
-			<result outcome="success" type="quality" timestamp="2024-08-27 13:23:58 +1200">
+			<comment>7. The time interval between two consecutive ventricular events is always less or equal to LRI.</comment>
+			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
 			</result>
-		</query>
-		<query>
-			<formula/>
-			<comment/>
-		</query>
-		<query>
-			<formula/>
-			<comment>6. The pacemaker never delivers a pacing pulse (VP) within URI.</comment>
 		</query>
 		<query>
 			<formula>A[] (Monitor_URI.VPDetected imply Monitor_URI.t &gt;= TURI)</formula>
-			<comment/>
-			<result outcome="success" type="quality" timestamp="2024-08-27 13:23:58 +1200">
+			<comment>6. The pacemaker never delivers a pacing pulse (VP) within URI.</comment>
+			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
 			</result>
-		</query>
-		<query>
-			<formula/>
-			<comment/>
-		</query>
-		<query>
-			<formula/>
-			<comment>5. The pacemaker never delivers a pacing pulse (VP) within AVI.</comment>
 		</query>
 		<query>
 			<formula>A[] (Monitor_AVI.VPDetected imply Monitor_AVI.t &gt;= TAVI)</formula>
-			<comment/>
-			<result outcome="success" type="quality" timestamp="2024-08-27 13:23:58 +1200">
+			<comment>5. The pacemaker never delivers a pacing pulse (VP) within AVI.</comment>
+			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
 			</result>
-		</query>
-		<query>
-			<formula/>
-			<comment/>
-		</query>
-		<query>
-			<formula/>
-			<comment>4. The pacemaker never delivers a pacing pulse (AP) within AEI.</comment>
 		</query>
 		<query>
 			<formula>A[] (Monitor_AEI.APDetected imply Monitor_AEI.t &gt;= TAEI)</formula>
-			<comment/>
-			<result outcome="success" type="quality" timestamp="2024-08-27 13:23:58 +1200">
+			<comment>4. The pacemaker never delivers a pacing pulse (AP) within AEI.</comment>
+			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
 			</result>
-		</query>
-		<query>
-			<formula/>
-			<comment/>
-		</query>
-		<query>
-			<formula/>
-			<comment>3. An atrial sense (AS) cannot be generated within PVARP.</comment>
 		</query>
 		<query>
 			<formula>A[] (Monitor_PVARP.ASSensed imply Monitor_PVARP.t &gt;= TPVARP)</formula>
-			<comment/>
-			<result outcome="success" type="quality" timestamp="2024-08-27 13:23:58 +1200">
+			<comment>3. An atrial sense (AS) cannot be generated within PVARP.</comment>
+			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
 			</result>
-		</query>
-		<query>
-			<formula/>
-			<comment/>
-		</query>
-		<query>
-			<formula/>
-			<comment>2. A ventricular sense (VS) cannot be generated within VRP.</comment>
 		</query>
 		<query>
 			<formula>A[] (Monitor_VRP.VSSensed imply Monitor_VRP.t &gt;= TVRP)
 			</formula>
-			<comment/>
-			<result outcome="success" type="quality" timestamp="2024-08-27 13:23:58 +1200">
+			<comment>2. A ventricular sense (VS) cannot be generated within VRP.</comment>
+			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
 			</result>
-		</query>
-		<query>
-			<formula/>
-			<comment/>
-		</query>
-		<query>
-			<formula/>
-			<comment>1. The system is deadlock free.</comment>
 		</query>
 		<query>
 			<formula>A[] not deadlock
 			</formula>
-			<comment/>
-			<result outcome="success" type="quality" timestamp="2024-08-27 13:23:58 +1200">
+			<comment>1. The system is deadlock free.</comment>
+			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
 			</result>
+		</query>
+		<query>
+			<formula/>
+			<comment/>
 		</query>
 	</queries>
 </nta>
