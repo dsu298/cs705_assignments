@@ -18,7 +18,12 @@ const int PVARP = 100;
 const int URI = 400; 
 const int LRI = AEI + AVI;
 ```
+**Random Heart Model (RHM)**
+The RHM will be what generates ventricular and atrial events for the uppaal model.
 
+![](resources/RHM.png)
+
+*Figure 2: Random Heart Model*
 ### Lower Rate Interval (LRI) and Atrial Escape Interval (AEI)
 **LRI**, the maximum time interval between two consecutive ventricular events. In dual chamber mode, LRI time interval equals the summation of AVI and AEI. It serves as the lower bound for the heart rate, and hence the value of LRI is greater than URI.
 **AEI**, the maximum time interval between a ventricular event and the corresponding atrial event.

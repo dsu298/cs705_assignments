@@ -295,7 +295,7 @@ clock x_URI = 0;</declaration>
 			<name x="-187" y="-8">Wait1</name>
 		</location>
 		<location id="id43" x="34" y="25">
-			<name x="24" y="-9">Wait2</name>
+			<name x="17" y="42">Wait2</name>
 		</location>
 		<location id="id44" x="195" y="25">
 			<name x="161" y="-8">VSSensed</name>
@@ -304,24 +304,31 @@ clock x_URI = 0;</declaration>
 		<init ref="id42"/>
 		<transition id="id45">
 			<source ref="id44"/>
-			<target ref="id42"/>
-			<label kind="assignment" x="0" y="102">t=0</label>
-			<nail x="195" y="127"/>
-			<nail x="-178" y="127"/>
+			<target ref="id43"/>
+			<label kind="assignment" x="110" y="59">t=0</label>
+			<nail x="119" y="59"/>
 		</transition>
 		<transition id="id46">
+			<source ref="id43"/>
+			<target ref="id43"/>
+			<label kind="synchronisation" x="17" y="-59">VP?</label>
+			<label kind="assignment" x="17" y="-42">t=0</label>
+			<nail x="8" y="-25"/>
+			<nail x="59" y="-25"/>
+		</transition>
+		<transition id="id47">
 			<source ref="id43"/>
 			<target ref="id44"/>
 			<label kind="synchronisation" x="102" y="0">VS?</label>
 		</transition>
-		<transition id="id47">
+		<transition id="id48">
 			<source ref="id42"/>
 			<target ref="id43"/>
 			<label kind="synchronisation" x="-85" y="-42">VS?</label>
 			<label kind="assignment" x="-85" y="-25">t=0</label>
 			<nail x="-76" y="-8"/>
 		</transition>
-		<transition id="id48">
+		<transition id="id49">
 			<source ref="id42"/>
 			<target ref="id43"/>
 			<label kind="synchronisation" x="-85" y="17">VP?</label>
@@ -331,41 +338,49 @@ clock x_URI = 0;</declaration>
 	</template>
 	<template>
 		<name>PVARP_Monitor</name>
-		<parameter>broadcast chan &amp;VS, broadcast chan &amp;VP, broadcast chan &amp;AS</parameter>
+		<parameter>broadcast chan &amp;VS, broadcast chan &amp;VP, broadcast chan &amp;AS, broadcast chan &amp;AP</parameter>
 		<declaration>clock t;</declaration>
-		<location id="id49" x="-450" y="0">
-			<name x="-459" y="-33">Wait1</name>
+		<location id="id50" x="-450" y="0">
+			<name x="-510" y="-8">Wait1</name>
 		</location>
-		<location id="id50" x="-238" y="0">
-			<name x="-248" y="-34">Wait2</name>
+		<location id="id51" x="-238" y="0">
+			<name x="-255" y="8">Wait2</name>
 		</location>
-		<location id="id51" x="-77" y="0">
+		<location id="id52" x="-77" y="0">
 			<name x="-110" y="-34">ASSensed</name>
 			<committed/>
 		</location>
-		<init ref="id49"/>
-		<transition id="id52">
+		<init ref="id50"/>
+		<transition id="id53">
 			<source ref="id51"/>
-			<target ref="id49"/>
+			<target ref="id50"/>
+			<label kind="synchronisation" x="-357" y="-110">AP?</label>
+			<label kind="assignment" x="-357" y="-93">t=0</label>
+			<nail x="-238" y="-93"/>
+			<nail x="-450" y="-93"/>
+		</transition>
+		<transition id="id54">
+			<source ref="id52"/>
+			<target ref="id50"/>
 			<label kind="assignment" x="-272" y="77">t=0</label>
 			<nail x="-77" y="102"/>
 			<nail x="-450" y="102"/>
 		</transition>
-		<transition id="id53">
-			<source ref="id50"/>
-			<target ref="id51"/>
+		<transition id="id55">
+			<source ref="id51"/>
+			<target ref="id52"/>
 			<label kind="synchronisation" x="-170" y="-25">AS?</label>
 		</transition>
-		<transition id="id54">
-			<source ref="id49"/>
-			<target ref="id50"/>
+		<transition id="id56">
+			<source ref="id50"/>
+			<target ref="id51"/>
 			<label kind="synchronisation" x="-357" y="-67">VS?</label>
 			<label kind="assignment" x="-357" y="-50">t=0</label>
 			<nail x="-348" y="-33"/>
 		</transition>
-		<transition id="id55">
-			<source ref="id49"/>
-			<target ref="id50"/>
+		<transition id="id57">
+			<source ref="id50"/>
+			<target ref="id51"/>
 			<label kind="synchronisation" x="-357" y="-8">VP?</label>
 			<label kind="assignment" x="-357" y="9">t=0</label>
 			<nail x="-348" y="34"/>
@@ -375,56 +390,56 @@ clock x_URI = 0;</declaration>
 		<name x="5" y="5">LRI</name>
 		<parameter>broadcast chan &amp;AP, broadcast chan &amp;AS, broadcast chan &amp;VP, broadcast chan &amp;VS</parameter>
 		<declaration>clock x;</declaration>
-		<location id="id56" x="-187" y="34">
+		<location id="id58" x="-187" y="34">
 			<name x="-229" y="8">LRI</name>
 			<label kind="invariant" x="-263" y="25">x&lt;=TAEI</label>
 		</location>
-		<location id="id57" x="-187" y="-170">
+		<location id="id59" x="-187" y="-170">
 			<name x="-221" y="-204">ASSensed</name>
 		</location>
-		<location id="id58" x="-187" y="187">
+		<location id="id60" x="-187" y="187">
 			<committed/>
 		</location>
-		<init ref="id56"/>
-		<transition id="id59">
-			<source ref="id58"/>
-			<target ref="id56"/>
+		<init ref="id58"/>
+		<transition id="id61">
+			<source ref="id60"/>
+			<target ref="id58"/>
 			<label kind="assignment" x="-212" y="102">x=0</label>
 		</transition>
-		<transition id="id60">
-			<source ref="id56"/>
-			<target ref="id58"/>
+		<transition id="id62">
+			<source ref="id58"/>
+			<target ref="id60"/>
 			<label kind="synchronisation" x="-272" y="136">VS?</label>
 			<nail x="-246" y="136"/>
 		</transition>
-		<transition id="id61">
-			<source ref="id56"/>
-			<target ref="id58"/>
+		<transition id="id63">
+			<source ref="id58"/>
+			<target ref="id60"/>
 			<label kind="synchronisation" x="-127" y="136">VP?</label>
 			<nail x="-127" y="136"/>
 		</transition>
-		<transition id="id62">
-			<source ref="id57"/>
-			<target ref="id56"/>
+		<transition id="id64">
+			<source ref="id59"/>
+			<target ref="id58"/>
 			<label kind="synchronisation" x="-119" y="-119">VP?</label>
 			<label kind="assignment" x="-119" y="-102">x=0</label>
 			<nail x="-119" y="-102"/>
 		</transition>
-		<transition id="id63">
-			<source ref="id57"/>
-			<target ref="id56"/>
+		<transition id="id65">
+			<source ref="id59"/>
+			<target ref="id58"/>
 			<label kind="synchronisation" x="-280" y="-119">VS?</label>
 			<label kind="assignment" x="-280" y="-102">x=0</label>
 			<nail x="-255" y="-102"/>
 		</transition>
-		<transition id="id64">
-			<source ref="id56"/>
-			<target ref="id57"/>
+		<transition id="id66">
+			<source ref="id58"/>
+			<target ref="id59"/>
 			<label kind="synchronisation" x="-212" y="-110">AS?</label>
 		</transition>
-		<transition id="id65">
-			<source ref="id56"/>
-			<target ref="id56"/>
+		<transition id="id67">
+			<source ref="id58"/>
+			<target ref="id58"/>
 			<label kind="guard" x="-85" y="8">x&gt;=TAEI</label>
 			<label kind="synchronisation" x="-84" y="25">AP!</label>
 			<label kind="assignment" x="-85" y="42">x=0</label>
@@ -435,28 +450,28 @@ clock x_URI = 0;</declaration>
 	<template>
 		<name>URI</name>
 		<parameter>broadcast chan &amp;VP, broadcast chan &amp;VS</parameter>
-		<location id="id66" x="-8" y="-8">
+		<location id="id68" x="-8" y="-8">
 			<name x="-50" y="-17">URI</name>
 		</location>
-		<location id="id67" x="127" y="-8">
+		<location id="id69" x="127" y="-8">
 			<name x="144" y="-17">reset</name>
 			<committed/>
 		</location>
-		<init ref="id66"/>
-		<transition id="id68">
-			<source ref="id67"/>
-			<target ref="id66"/>
+		<init ref="id68"/>
+		<transition id="id70">
+			<source ref="id69"/>
+			<target ref="id68"/>
 			<label kind="assignment" x="34" y="-25">x_URI=0</label>
 		</transition>
-		<transition id="id69">
-			<source ref="id66"/>
-			<target ref="id67"/>
+		<transition id="id71">
+			<source ref="id68"/>
+			<target ref="id69"/>
 			<label kind="synchronisation" x="51" y="34">VS?</label>
 			<nail x="59" y="34"/>
 		</transition>
-		<transition id="id70">
-			<source ref="id66"/>
-			<target ref="id67"/>
+		<transition id="id72">
+			<source ref="id68"/>
+			<target ref="id69"/>
 			<label kind="synchronisation" x="51" y="-76">VP?</label>
 			<nail x="59" y="-59"/>
 		</transition>
@@ -465,64 +480,64 @@ clock x_URI = 0;</declaration>
 		<name>AVI</name>
 		<parameter>broadcast chan &amp;VP, broadcast chan &amp;VS, broadcast chan &amp;AS, broadcast chan &amp;AP</parameter>
 		<declaration>clock x;</declaration>
-		<location id="id71" x="0" y="0">
+		<location id="id73" x="0" y="0">
 			<name x="25" y="-25">IDLE</name>
 		</location>
-		<location id="id72" x="0" y="119">
+		<location id="id74" x="0" y="119">
 			<name x="17" y="119">AVI</name>
 			<label kind="invariant" x="17" y="136">x&lt;=TAVI</label>
 		</location>
-		<location id="id73" x="0" y="-119">
+		<location id="id75" x="0" y="-119">
 			<name x="-25" y="-170">WaitURI</name>
 			<label kind="invariant" x="-25" y="-153">x_URI&lt;=TURI</label>
 		</location>
-		<init ref="id71"/>
-		<transition id="id74">
-			<source ref="id72"/>
-			<target ref="id71"/>
+		<init ref="id73"/>
+		<transition id="id76">
+			<source ref="id74"/>
+			<target ref="id73"/>
 			<label kind="guard" x="-306" y="59">x&gt;=TAVI &amp;&amp; x_URI&gt;=TURI</label>
 			<label kind="synchronisation" x="-144" y="42">VP!</label>
 			<nail x="-110" y="119"/>
 			<nail x="-110" y="0"/>
 		</transition>
-		<transition id="id75">
-			<source ref="id73"/>
-			<target ref="id71"/>
+		<transition id="id77">
+			<source ref="id75"/>
+			<target ref="id73"/>
 			<label kind="guard" x="-144" y="-68">x_URI&gt;=TURI</label>
 			<label kind="synchronisation" x="-76" y="-85">VP!</label>
 			<nail x="-51" y="-68"/>
 		</transition>
-		<transition id="id76">
-			<source ref="id72"/>
-			<target ref="id73"/>
+		<transition id="id78">
+			<source ref="id74"/>
+			<target ref="id75"/>
 			<label kind="guard" x="0" y="187">x&gt;=TAVI &amp;&amp; x_URI&lt;TURI</label>
 			<nail x="0" y="187"/>
 			<nail x="178" y="187"/>
 			<nail x="178" y="-119"/>
 		</transition>
-		<transition id="id77">
-			<source ref="id72"/>
-			<target ref="id71"/>
+		<transition id="id79">
+			<source ref="id74"/>
+			<target ref="id73"/>
 			<label kind="synchronisation" x="136" y="42">VS?</label>
 			<nail x="127" y="119"/>
 			<nail x="127" y="0"/>
 		</transition>
-		<transition id="id78">
-			<source ref="id73"/>
-			<target ref="id71"/>
+		<transition id="id80">
+			<source ref="id75"/>
+			<target ref="id73"/>
 			<label kind="synchronisation" x="51" y="-76">VS?</label>
 			<nail x="51" y="-68"/>
 		</transition>
-		<transition id="id79">
-			<source ref="id71"/>
-			<target ref="id72"/>
+		<transition id="id81">
+			<source ref="id73"/>
+			<target ref="id74"/>
 			<label kind="synchronisation" x="51" y="42">AS?</label>
 			<label kind="assignment" x="51" y="59">x=0</label>
 			<nail x="51" y="59"/>
 		</transition>
-		<transition id="id80">
-			<source ref="id71"/>
-			<target ref="id72"/>
+		<transition id="id82">
+			<source ref="id73"/>
+			<target ref="id74"/>
 			<label kind="synchronisation" x="-76" y="42">AP?</label>
 			<label kind="assignment" x="-76" y="59">x=0</label>
 			<nail x="-51" y="59"/>
@@ -532,38 +547,38 @@ clock x_URI = 0;</declaration>
 		<name>VRP</name>
 		<parameter>broadcast chan &amp;VS, broadcast chan &amp;VSense, broadcast chan &amp;VP</parameter>
 		<declaration>clock x;</declaration>
-		<location id="id81" x="-238" y="-34">
+		<location id="id83" x="-238" y="-34">
 			<name x="-248" y="-68">IDLE</name>
 		</location>
-		<location id="id82" x="68" y="-34">
+		<location id="id84" x="68" y="-34">
 			<name x="58" y="-68">VRP</name>
 			<label kind="invariant" x="59" y="-85">x&lt;=TVRP</label>
 		</location>
-		<location id="id83" x="-85" y="-34">
+		<location id="id85" x="-85" y="-34">
 			<name x="-119" y="-68">VSSensed</name>
 			<committed/>
 		</location>
-		<init ref="id81"/>
-		<transition id="id84">
-			<source ref="id83"/>
-			<target ref="id82"/>
+		<init ref="id83"/>
+		<transition id="id86">
+			<source ref="id85"/>
+			<target ref="id84"/>
 			<label kind="synchronisation" x="-42" y="-51">VS!</label>
 			<label kind="assignment" x="-42" y="-34">x=0</label>
 		</transition>
-		<transition id="id85">
-			<source ref="id81"/>
-			<target ref="id83"/>
+		<transition id="id87">
+			<source ref="id83"/>
+			<target ref="id85"/>
 			<label kind="synchronisation" x="-187" y="-51">VSense?</label>
 		</transition>
-		<transition id="id86">
-			<source ref="id82"/>
-			<target ref="id81"/>
+		<transition id="id88">
+			<source ref="id84"/>
+			<target ref="id83"/>
 			<label kind="guard" x="-119" y="-144">x&gt;=TVRP</label>
 			<nail x="-85" y="-127"/>
 		</transition>
-		<transition id="id87">
-			<source ref="id81"/>
-			<target ref="id82"/>
+		<transition id="id89">
+			<source ref="id83"/>
+			<target ref="id84"/>
 			<label kind="synchronisation" x="-102" y="42">VP?</label>
 			<label kind="assignment" x="-102" y="59">x=0</label>
 			<nail x="-85" y="42"/>
@@ -573,48 +588,48 @@ clock x_URI = 0;</declaration>
 		<name>PVARP</name>
 		<parameter>broadcast chan &amp;AS, broadcast chan &amp;ASense, broadcast chan &amp;VS, broadcast chan &amp;VP</parameter>
 		<declaration>clock x;</declaration>
-		<location id="id88" x="-51" y="17">
+		<location id="id90" x="-51" y="17">
 			<name x="-68" y="34">IDLE</name>
 		</location>
-		<location id="id89" x="-170" y="17">
+		<location id="id91" x="-170" y="17">
 			<name x="-255" y="8">ASSensed</name>
 			<committed/>
 		</location>
-		<location id="id90" x="68" y="17">
+		<location id="id92" x="68" y="17">
 			<name x="51" y="34">PVARP</name>
 			<label kind="invariant" x="52" y="51">x&lt;=TPVARP</label>
 		</location>
-		<init ref="id88"/>
-		<transition id="id91">
-			<source ref="id90"/>
-			<target ref="id88"/>
+		<init ref="id90"/>
+		<transition id="id93">
+			<source ref="id92"/>
+			<target ref="id90"/>
 			<label kind="guard" x="-34" y="-102">x&gt;=TPVARP</label>
 			<nail x="68" y="-76"/>
 			<nail x="-51" y="-75"/>
 		</transition>
-		<transition id="id92">
-			<source ref="id88"/>
-			<target ref="id90"/>
+		<transition id="id94">
+			<source ref="id90"/>
+			<target ref="id92"/>
 			<label kind="synchronisation" x="-9" y="60">VP?</label>
 			<label kind="assignment" x="-9" y="77">x=0</label>
 			<nail x="8" y="60"/>
 		</transition>
-		<transition id="id93">
-			<source ref="id88"/>
-			<target ref="id90"/>
+		<transition id="id95">
+			<source ref="id90"/>
+			<target ref="id92"/>
 			<label kind="synchronisation" x="-8" y="-59">VS?</label>
 			<label kind="assignment" x="-9" y="-42">x=0</label>
 			<nail x="8" y="-25"/>
 		</transition>
-		<transition id="id94">
-			<source ref="id89"/>
-			<target ref="id88"/>
+		<transition id="id96">
+			<source ref="id91"/>
+			<target ref="id90"/>
 			<label kind="synchronisation" x="-119" y="-42">AS!</label>
 			<nail x="-111" y="-25"/>
 		</transition>
-		<transition id="id95">
-			<source ref="id88"/>
-			<target ref="id89"/>
+		<transition id="id97">
+			<source ref="id90"/>
+			<target ref="id91"/>
 			<label kind="synchronisation" x="-136" y="60">ASense?</label>
 			<nail x="-111" y="60"/>
 		</transition>
@@ -641,7 +656,7 @@ Monitor_URI = URI_Monitor(VS, VP);
 Monitor_AVI = AVI_Monitor(VS, VP, AS, AP);
 Monitor_AEI = AEI_Monitor(VS, VP, AS, AP);
 Monitor_VRP = VRP_Monitor(VS, VP);
-Monitor_PVARP = PVARP_Monitor(VS, VP, AS);
+Monitor_PVARP = PVARP_Monitor(VS, VP, AS, AP);
 
 // List one or more processes to be composed into a system.
 system Random_Ventricle, Random_Atria, Con_LRI, Con_VRP, Con_AVI, Con_URI, Con_PVARP, Monitor_LRI, Monitor_URI, Monitor_AVI, Monitor_AEI, Monitor_VRP, Monitor_PVARP;
@@ -650,51 +665,51 @@ system Random_Ventricle, Random_Atria, Con_LRI, Con_VRP, Con_AVI, Con_URI, Con_P
 		<query>
 			<formula>E&lt;&gt; (Monitor_AVI.VPDetected imply Monitor_LRI.t &gt; TAVI)</formula>
 			<comment>8. The pacemaker can deliver a pacing pulse (VP), where the time interval between this VP and its preceding atrial event is greater than AVI.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-27 17:22:14 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] (Monitor_LRI.VDetected imply Monitor_LRI.t &lt;= TLRI)</formula>
 			<comment>7. The time interval between two consecutive ventricular events is always less or equal to LRI.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-27 17:22:14 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] (Monitor_URI.VPDetected imply Monitor_URI.t &gt;= TURI)</formula>
 			<comment>6. The pacemaker never delivers a pacing pulse (VP) within URI.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-27 17:22:14 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] (Monitor_AVI.VPDetected imply Monitor_AVI.t &gt;= TAVI)</formula>
 			<comment>5. The pacemaker never delivers a pacing pulse (VP) within AVI.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-27 17:22:14 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] (Monitor_AEI.APDetected imply Monitor_AEI.t &gt;= TAEI)</formula>
 			<comment>4. The pacemaker never delivers a pacing pulse (AP) within AEI.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-27 17:22:14 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] (Monitor_PVARP.ASSensed imply Monitor_PVARP.t &gt;= TPVARP)</formula>
 			<comment>3. An atrial sense (AS) cannot be generated within PVARP.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-27 17:22:14 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] (Monitor_VRP.VSSensed imply Monitor_VRP.t &gt;= TVRP)
 			</formula>
 			<comment>2. A ventricular sense (VS) cannot be generated within VRP.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-27 17:22:14 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] not deadlock
 			</formula>
 			<comment>1. The system is deadlock free.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-27 14:52:10 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-27 17:22:14 +1200">
 			</result>
 		</query>
 		<query>
