@@ -28,15 +28,15 @@ Use UPPAAL to build a DDD mode pacemaker to deliver treatments conforming to the
 ![URI_Model](resources/URI.png)
 
 ### Atrio-Ventricular Interval (AVI)
-
+A-V Interval
 ![AVI_Model](resources/AVI.png)
 
 ### Post Ventricular Atrial Refractory Period (PVARP)
-
+Minimum V-A Interval
 ![PVARP_Model](resources/PVARP.png)
 
 ### Ventricular Refractory Period (VRP)
-
+Minimum V-V Interval.
 ![VRP_Model](resources/VRP.png)
 
 ## Verification
