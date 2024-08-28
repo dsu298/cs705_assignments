@@ -489,67 +489,67 @@ clock x_URI = 0;</declaration>
 		<name>AVI</name>
 		<parameter>broadcast chan &amp;VP, broadcast chan &amp;VS, broadcast chan &amp;AS, broadcast chan &amp;AP</parameter>
 		<declaration>clock x;</declaration>
-		<location id="id75" x="0" y="0">
-			<name x="25" y="-25">IDLE</name>
+		<location id="id75" x="-119" y="8">
+			<name x="-110" y="-34">IDLE</name>
 		</location>
-		<location id="id76" x="0" y="119">
-			<name x="17" y="119">AVI</name>
-			<label kind="invariant" x="17" y="136">x&lt;=TAVI</label>
+		<location id="id76" x="-297" y="8">
+			<name x="-331" y="-34">AVI</name>
+			<label kind="invariant" x="-365" y="-17">x&lt;=TAVI</label>
 		</location>
-		<location id="id77" x="0" y="-119">
-			<name x="-25" y="-170">WaitURI</name>
-			<label kind="invariant" x="-25" y="-153">x_URI&lt;=TURI</label>
+		<location id="id77" x="51" y="8">
+			<name x="41" y="-26">WaitURI</name>
+			<label kind="invariant" x="42" y="-42">x_URI&lt;=TURI</label>
 		</location>
 		<init ref="id75"/>
 		<transition id="id78">
 			<source ref="id76"/>
-			<target ref="id75"/>
-			<label kind="guard" x="-306" y="59">x&gt;=TAVI &amp;&amp; x_URI&gt;=TURI</label>
-			<label kind="synchronisation" x="-144" y="42">VP!</label>
-			<nail x="-110" y="119"/>
-			<nail x="-110" y="0"/>
+			<target ref="id77"/>
+			<label kind="guard" x="-255" y="161">x&gt;=TAVI &amp;&amp; x_URI&lt;TURI</label>
+			<nail x="-331" y="8"/>
+			<nail x="-331" y="161"/>
+			<nail x="51" y="161"/>
 		</transition>
 		<transition id="id79">
-			<source ref="id77"/>
+			<source ref="id76"/>
 			<target ref="id75"/>
-			<label kind="guard" x="-144" y="-68">x_URI&gt;=TURI</label>
-			<label kind="synchronisation" x="-76" y="-85">VP!</label>
-			<nail x="-51" y="-68"/>
+			<label kind="guard" x="-306" y="-127">x&gt;=TAVI &amp;&amp; x_URI&gt;=TURI</label>
+			<label kind="synchronisation" x="-221" y="-144">VP!</label>
+			<nail x="-297" y="-110"/>
+			<nail x="-119" y="-110"/>
 		</transition>
 		<transition id="id80">
 			<source ref="id76"/>
-			<target ref="id77"/>
-			<label kind="guard" x="0" y="187">x&gt;=TAVI &amp;&amp; x_URI&lt;TURI</label>
-			<nail x="0" y="187"/>
-			<nail x="178" y="187"/>
-			<nail x="178" y="-119"/>
+			<target ref="id75"/>
+			<label kind="synchronisation" x="-221" y="110">VS?</label>
+			<nail x="-297" y="110"/>
+			<nail x="-119" y="110"/>
 		</transition>
 		<transition id="id81">
-			<source ref="id76"/>
-			<target ref="id75"/>
-			<label kind="synchronisation" x="136" y="42">VS?</label>
-			<nail x="127" y="119"/>
-			<nail x="127" y="0"/>
+			<source ref="id75"/>
+			<target ref="id76"/>
+			<label kind="synchronisation" x="-221" y="51">AS?</label>
+			<label kind="assignment" x="-221" y="68">x=0</label>
+			<nail x="-204" y="51"/>
 		</transition>
 		<transition id="id82">
-			<source ref="id77"/>
-			<target ref="id75"/>
-			<label kind="synchronisation" x="51" y="-76">VS?</label>
-			<nail x="51" y="-68"/>
+			<source ref="id75"/>
+			<target ref="id76"/>
+			<label kind="synchronisation" x="-221" y="-76">AP?</label>
+			<label kind="assignment" x="-221" y="-59">x=0</label>
+			<nail x="-204" y="-42"/>
 		</transition>
 		<transition id="id83">
-			<source ref="id75"/>
-			<target ref="id76"/>
-			<label kind="synchronisation" x="51" y="42">AS?</label>
-			<label kind="assignment" x="51" y="59">x=0</label>
-			<nail x="51" y="59"/>
+			<source ref="id77"/>
+			<target ref="id75"/>
+			<label kind="guard" x="-76" y="59">x_URI&gt;=TURI</label>
+			<label kind="synchronisation" x="-42" y="76">VP!</label>
+			<nail x="-34" y="59"/>
 		</transition>
 		<transition id="id84">
-			<source ref="id75"/>
-			<target ref="id76"/>
-			<label kind="synchronisation" x="-76" y="42">AP?</label>
-			<label kind="assignment" x="-76" y="59">x=0</label>
-			<nail x="-51" y="59"/>
+			<source ref="id77"/>
+			<target ref="id75"/>
+			<label kind="synchronisation" x="-42" y="-59">VS?</label>
+			<nail x="-34" y="-42"/>
 		</transition>
 	</template>
 	<template>
@@ -673,49 +673,51 @@ system Random_Ventricle, Random_Atria, Con_AEI, Con_VRP, Con_AVI, Con_URI, Con_P
 		<query>
 			<formula>E&lt;&gt; (Monitor_AVI.VPDetected imply Monitor_LRI.t &gt; TAVI)</formula>
 			<comment>8. The pacemaker can deliver a pacing pulse (VP), where the time interval between this VP and its preceding atrial event is greater than AVI.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-28 01:51:37 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-28 15:15:13 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] (Monitor_LRI.VDetected imply Monitor_LRI.t &lt;= TLRI)</formula>
 			<comment>7. The time interval between two consecutive ventricular events is always less or equal to LRI.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-28 01:51:37 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-28 15:15:13 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] (Monitor_URI.VPDetected imply Monitor_URI.t &gt;= TURI)</formula>
 			<comment>6. The pacemaker never delivers a pacing pulse (VP) within URI.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-28 01:51:37 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-28 15:15:13 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] (Monitor_AVI.VPDetected imply Monitor_AVI.t &gt;= TAVI)</formula>
 			<comment>5. The pacemaker never delivers a pacing pulse (VP) within AVI.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-28 01:51:37 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-28 15:15:13 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] (Monitor_AEI.APDetected imply Monitor_AEI.t &gt;= TAEI)</formula>
 			<comment>4. The pacemaker never delivers a pacing pulse (AP) within AEI.</comment>
+			<result outcome="success" type="quality" timestamp="2024-08-28 15:15:13 +1200">
+			</result>
 		</query>
 		<query>
 			<formula>A[] (Monitor_PVARP.ASSensed imply Monitor_PVARP.t &gt;= TPVARP)</formula>
 			<comment>3. An atrial sense (AS) cannot be generated within PVARP.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-28 01:51:37 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-28 15:15:13 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] (Monitor_VRP.VSSensed imply Monitor_VRP.t &gt;= TVRP)
 			</formula>
 			<comment>2. A ventricular sense (VS) cannot be generated within VRP.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-28 01:51:37 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-28 15:15:13 +1200">
 			</result>
 		</query>
 		<query>
 			<formula>A[] not deadlock
 			</formula>
 			<comment>1. The system is deadlock free.</comment>
-			<result outcome="success" type="quality" timestamp="2024-08-28 01:51:37 +1200">
+			<result outcome="success" type="quality" timestamp="2024-08-28 15:15:13 +1200">
 			</result>
 		</query>
 		<query>
