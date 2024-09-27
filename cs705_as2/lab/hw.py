@@ -28,6 +28,7 @@ def main():
     functional(Sf, Cf, A, B, Cin, s)
     Si, Ci = Bool('Si'), Bool('Ci')
     implementation(Si, Ci, A, B, Cin, s)
+    
     # Now the "mitre" circuit
     s.add(Or(Xor(Sf, Si), Xor(Cf, Ci)))
 

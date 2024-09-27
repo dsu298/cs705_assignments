@@ -1,0 +1,53 @@
+never safety {    /* !([] (! ((ncrit>1)))) */
+T0_init:
+	do
+	:: atomic { (! ((! ((ncrit>1))))) -> assert(!(! ((! ((ncrit>1)))))) }
+	:: (1) -> goto T0_init
+	od;
+accept_all:
+	skip
+}
+never liveness1_proc0 {    /* !([] ((! ((flag[0]==1))) || (<> (in_cs[0])))) */
+T0_init:
+	do
+	:: (! ((! ((flag[0]==1)))) && ! ((in_cs[0]))) -> goto accept_S4
+	:: (1) -> goto T0_init
+	od;
+accept_S4:
+	do
+	:: (! ((in_cs[0]))) -> goto accept_S4
+	od;
+}
+never liveness1_proc1 {    /* !([] ((! ((flag[1]==1))) || (<> (in_cs[1])))) */
+T0_init:
+	do
+	:: (! ((! ((flag[1]==1)))) && ! ((in_cs[1]))) -> goto accept_S4
+	:: (1) -> goto T0_init
+	od;
+accept_S4:
+	do
+	:: (! ((in_cs[1]))) -> goto accept_S4
+	od;
+}
+never liveness2_proc0 {    /* !([] ((! (! (in_cs[0]))) || (<> (in_cs[0])))) */
+T0_init:
+	do
+	:: (! ((! (! (in_cs[0])))) && ! ((in_cs[0]))) -> goto accept_S4
+	:: (1) -> goto T0_init
+	od;
+accept_S4:
+	do
+	:: (! ((in_cs[0]))) -> goto accept_S4
+	od;
+}
+never liveness2_proc1 {    /* !([] ((! (! (in_cs[1]))) || (<> (in_cs[1])))) */
+T0_init:
+	do
+	:: (! ((! (! (in_cs[1])))) && ! ((in_cs[1]))) -> goto accept_S4
+	:: (1) -> goto T0_init
+	od;
+accept_S4:
+	do
+	:: (! ((in_cs[1]))) -> goto accept_S4
+	od;
+}
