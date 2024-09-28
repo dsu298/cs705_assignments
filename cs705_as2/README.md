@@ -1,7 +1,9 @@
 # CS705 Assignment 2
+
 ### Q1.) Model-checking LTL properties using SPIN
 
 **ltl properties:**
+
 ``` c
 /* Safety Property: Multiple processes cannot enter the critical section simultaneously. */
 ltl safety { [](ncrit <= 1) }
@@ -88,44 +90,58 @@ Unreached states in ltl properties:
 ### Q2.) SMT solvers for hardware verification
 
 **Majority voter equation**:
+
 ``` python
 Y = (!ABC) + (A!BC) + (AB!C) + (ABC)
 ```
 
 **Equation**:
+
 ``` python
 Y' = AB + BC + AC
 ```
 
 **Result**:
+
 ``` bash
 admin@debian:~/repo/cs705_assignments$ python -u "/home/admin/repo/cs705_assignments/cs705_as2/Q2/smt_sovler.py"
 Equations are equivalent
 ```
+
 **Simplification steps to prove `!ABC + A!BC + AB!C + ABC == BC + AB + AC`**:
+
 Majority voter equation:
+
 `(!ABC) + (A!BC) + (AB!C) + (ABC)`
 
 1. distributive law: `ABC + !ABC = BC(!A + A)`
+
 `BC(!A + A) + A!BC + AB!C`
 
 2. complement law: `(!A + A) = 1`
+
 `BC + A!BC + AB!C`
 
 3. distributive law: `BC + A!BC = C(A!B + B)`
+
 `C(A!B + B) + AB!C`
 
 4. absorption law: `A!B + B = A + B`
+
 `C(A + B) + AB!C`
 
 5. expand: `C(A + B) = AC + BC`
+
 `AC + BC + AB!C`
 
 6. distributive law: `AC + AB!C = A(B!C + C)`
+
 `BC + A(B!C + C)`
 
 7. absorption law: `A(B!C + C) = A(B + C)`
+
 `BC + A(B + C)`
 
 8. expand: `A(B + C) = AB + AC`
+   
 `BC + AB + AC`
