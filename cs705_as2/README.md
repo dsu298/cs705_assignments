@@ -109,23 +109,23 @@ Majority voter equation:
 1. distributive law: `ABC + !ABC = BC(!A + A)`
 `BC(!A + A) + A!BC + AB!C`
 
-1. complement law: `(!A + A) = 1`
+2. complement law: `(!A + A) = 1`
 `BC + A!BC + AB!C`
 
-1. distributive law: `BC + A!BC = C(A!B + B)`
+3. distributive law: `BC + A!BC = C(A!B + B)`
 `C(A!B + B) + AB!C`
 
-1. absorption law: `A!B +B = A + B`
+4. absorption law: `A!B + B = A + B`
 `C(A + B) + AB!C`
 
-1. expand: `C(A + B) = AC + BC`
+5. expand: `C(A + B) = AC + BC`
 `AC + BC + AB!C`
 
-1. distributive law: `AC + AB!C = A(B!C + C)`
+6. distributive law: `AC + AB!C = A(B!C + C)`
 `BC + A(B!C + C)`
 
-1. absorption law: `A(B!C + C) = A(B + C)`
+7. absorption law: `A(B!C + C) = A(B + C)`
 `BC + A(B + C)`
 
-1. expand: `A(B + C) = AB + AC`
+8. expand: `A(B + C) = AB + AC`
 `BC + AB + AC`
