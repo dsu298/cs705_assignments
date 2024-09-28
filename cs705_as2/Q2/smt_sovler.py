@@ -25,7 +25,7 @@ def main():
     
     circuit(Y_2, A, B, C, s)
     
-    # Mitre circuit to check equivalence
+    # The "mitre" circuit to check equivalence
     s.add(Xor(Y_1, Y_2))
     
     if s.check() == sat:

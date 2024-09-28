@@ -139,35 +139,35 @@ typedef struct S_F_MAP {
 	int upto;
 } S_F_MAP;
 
-#define _nstates5	14	/* liveness2_proc1 */
-#define minseq5	61
-#define maxseq5	73
-#define _endstate5	13
+#define _nstates5	18	/* liveness2_pid1 */
+#define minseq5	72
+#define maxseq5	88
+#define _endstate5	17
 
-#define _nstates4	14	/* liveness2_proc0 */
-#define minseq4	48
-#define maxseq4	60
-#define _endstate4	13
+#define _nstates4	18	/* liveness2_pid0 */
+#define minseq4	55
+#define maxseq4	71
+#define _endstate4	17
 
-#define _nstates3	14	/* liveness1_proc1 */
-#define minseq3	35
-#define maxseq3	47
-#define _endstate3	13
+#define _nstates3	18	/* liveness1_pid1 */
+#define minseq3	38
+#define maxseq3	54
+#define _endstate3	17
 
-#define _nstates2	14	/* liveness1_proc0 */
-#define minseq2	22
-#define maxseq2	34
-#define _endstate2	13
+#define _nstates2	18	/* liveness1_pid0 */
+#define minseq2	21
+#define maxseq2	37
+#define _endstate2	17
 
 #define _nstates1	11	/* safety */
-#define minseq1	12
-#define maxseq1	21
+#define minseq1	11
+#define maxseq1	20
 #define _endstate1	10
 
-#define _nstates0	13	/* user */
+#define _nstates0	12	/* user */
 #define minseq0	0
-#define maxseq0	11
-#define _endstate0	12
+#define maxseq0	10
+#define _endstate0	11
 
 extern short src_ln5[];
 extern short src_ln4[];
@@ -183,8 +183,8 @@ extern S_F_MAP src_file1[];
 extern S_F_MAP src_file0[];
 
 #define T_ID	unsigned char
-#define _T5	27
-#define _T2	28
+#define _T5	29
+#define _T2	30
 #define WS		8 /* word size in bytes */
 #define SYNC	0
 #define ASYNC	0
@@ -199,40 +199,40 @@ extern S_F_MAP src_file0[];
 	#endif
 #endif
 
-typedef struct P5 { /* liveness2_proc1 */
+typedef struct P5 { /* liveness2_pid1 */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 4; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 6; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P5;
 #define Air5	(sizeof(P5) - 3)
 
-typedef struct P4 { /* liveness2_proc0 */
+typedef struct P4 { /* liveness2_pid0 */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 4; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 6; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P4;
 #define Air4	(sizeof(P4) - 3)
 
-typedef struct P3 { /* liveness1_proc1 */
+typedef struct P3 { /* liveness1_pid1 */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 4; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 6; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
 } P3;
 #define Air3	(sizeof(P3) - 3)
 
-typedef struct P2 { /* liveness1_proc0 */
+typedef struct P2 { /* liveness1_pid0 */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 4; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 6; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
@@ -242,7 +242,7 @@ typedef struct P2 { /* liveness1_proc0 */
 typedef struct P1 { /* safety */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 4; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 6; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
@@ -253,7 +253,7 @@ typedef struct P1 { /* safety */
 typedef struct P0 { /* user */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 4; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 6; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
@@ -263,7 +263,7 @@ typedef struct P0 { /* user */
 typedef struct P6 { /* np_ */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 4; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 6; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
@@ -281,7 +281,7 @@ typedef struct P6 { /* np_ */
 typedef struct P7 {
 	unsigned _pid : 8; /* always zero */
 	unsigned _t   : 4; /* active-claim type  */
-	unsigned _p   : 5; /* active-claim state */
+	unsigned _p   : 6; /* active-claim state */
 	unsigned _n   : 4; /* active-claim index */
 	uchar c_cur[NCLAIMS]; /* claim-states */
 } P7;
@@ -476,7 +476,6 @@ typedef struct State {
 #endif
 	unsigned turn : 1;
 	uchar flag[2];
-	uchar in_cs[2];
 	uchar ncrit;
 #ifdef TRIX
 	/* room for 512 proc+chan ptrs, + safety margin */
@@ -507,16 +506,16 @@ typedef struct TRIX_v6 {
 #define _endstate6	2 /* np_ */
 
 #define _start6	0 /* np_ */
-#define _start5	5
-#define _start4	5
-#define _start3	5
-#define _start2	5
+#define _start5	8
+#define _start4	8
+#define _start3	8
+#define _start2	8
 #define _start1	6
 #define _start0	1
 #ifdef NP
 	#define ACCEPT_LAB	1 /* at least 1 in np_ */
 #else
-	#define ACCEPT_LAB	5 /* user-defined accept labels */
+	#define ACCEPT_LAB	9 /* user-defined accept labels */
 #endif
 #ifdef MEMCNT
 	#ifdef MEMLIM
@@ -872,7 +871,7 @@ void qsend(int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	29
+#define NTRANS	31
 #if defined(BFS_PAR) || NCORE>1
 	void e_critical(int);
 	void x_critical(int);
