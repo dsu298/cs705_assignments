@@ -1,7 +1,6 @@
 from z3 import And, Not, Or, Bool, Solver, Xor, sat
 
 def majority_voter(Y_1, A, B, C, s):
-    # Y = (¬A /\ B /\ C) \/ (A /\ ¬B /\ C) \/ (A /\ B /\ ¬C) \/ (A /\ B /\ C)
     # Y = (!ABC) + (A!BC) + (AB!C) + (ABC)
     s.add(Y_1 == Or(And(Not(A), B, C),
                   And(A, Not(B), C),
@@ -9,7 +8,6 @@ def majority_voter(Y_1, A, B, C, s):
                   And(A, B, C)))
 
 def circuit(Y_2, A, B, C, s):
-    # Y' = (A /\ B) \/ (B /\ C) \/ (A /\ C)
     # Y' = AB + BC + AC
     s.add(Y_2 == Or(And(A, B),
                         And(B, C),

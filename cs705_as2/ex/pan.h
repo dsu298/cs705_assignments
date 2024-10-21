@@ -2,7 +2,7 @@
 #define PAN_H
 
 #define SpinVersion	"Spin Version 6.5.2 -- 6 December 2019"
-#define PanSource	"petersons_n_muetx.pml"
+#define PanSource	"peterson4-1.pml"
 
 #define G_long	8
 #define G_int	4
@@ -121,15 +121,15 @@
 #endif
 #ifdef NP
 	#define HAS_NP	2
-	#define VERI	8	/* np_ */
+	#define VERI	4	/* np_ */
 #endif
 #if defined(NOCLAIM) && defined(NP)
 	#undef NOCLAIM
 #endif
 #ifndef NOCLAIM
-	#define NCLAIMS	7
+	#define NCLAIMS	3
 	#ifndef NP
-		#define VERI	7
+		#define VERI	3
 	#endif
 #endif
 
@@ -139,32 +139,12 @@ typedef struct S_F_MAP {
 	int upto;
 } S_F_MAP;
 
-#define _nstates7	14	/* liveness2_p2 */
-#define minseq7	115
-#define maxseq7	127
-#define _endstate7	13
-
-#define _nstates6	14	/* liveness2_p1 */
-#define minseq6	102
-#define maxseq6	114
-#define _endstate6	13
-
-#define _nstates5	14	/* liveness2_p0 */
-#define minseq5	89
-#define maxseq5	101
-#define _endstate5	13
-
-#define _nstates4	14	/* liveness1_p2 */
-#define minseq4	76
-#define maxseq4	88
-#define _endstate4	13
-
-#define _nstates3	14	/* liveness1_p1 */
+#define _nstates3	14	/* liveness2_p1 */
 #define minseq3	63
 #define maxseq3	75
 #define _endstate3	13
 
-#define _nstates2	14	/* liveness1_p0 */
+#define _nstates2	14	/* liveness1_p1 */
 #define minseq2	50
 #define maxseq2	62
 #define _endstate2	13
@@ -179,26 +159,18 @@ typedef struct S_F_MAP {
 #define maxseq0	39
 #define _endstate0	40
 
-extern short src_ln7[];
-extern short src_ln6[];
-extern short src_ln5[];
-extern short src_ln4[];
 extern short src_ln3[];
 extern short src_ln2[];
 extern short src_ln1[];
 extern short src_ln0[];
-extern S_F_MAP src_file7[];
-extern S_F_MAP src_file6[];
-extern S_F_MAP src_file5[];
-extern S_F_MAP src_file4[];
 extern S_F_MAP src_file3[];
 extern S_F_MAP src_file2[];
 extern S_F_MAP src_file1[];
 extern S_F_MAP src_file0[];
 
 #define T_ID	unsigned char
-#define _T5	38
-#define _T2	39
+#define _T5	26
+#define _T2	27
 #define WS		8 /* word size in bytes */
 #define SYNC	0
 #define ASYNC	0
@@ -213,49 +185,9 @@ extern S_F_MAP src_file0[];
 	#endif
 #endif
 
-typedef struct P7 { /* liveness2_p2 */
+typedef struct P3 { /* liveness2_p1 */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 5; /* proctype */
-	unsigned _p   : 7; /* state    */
-#ifdef HAS_PRIORITY
-	unsigned _priority : 8; /* 0..255 */
-#endif
-} P7;
-#define Air7	(sizeof(P7) - 3)
-
-typedef struct P6 { /* liveness2_p1 */
-	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 5; /* proctype */
-	unsigned _p   : 7; /* state    */
-#ifdef HAS_PRIORITY
-	unsigned _priority : 8; /* 0..255 */
-#endif
-} P6;
-#define Air6	(sizeof(P6) - 3)
-
-typedef struct P5 { /* liveness2_p0 */
-	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 5; /* proctype */
-	unsigned _p   : 7; /* state    */
-#ifdef HAS_PRIORITY
-	unsigned _priority : 8; /* 0..255 */
-#endif
-} P5;
-#define Air5	(sizeof(P5) - 3)
-
-typedef struct P4 { /* liveness1_p2 */
-	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 5; /* proctype */
-	unsigned _p   : 7; /* state    */
-#ifdef HAS_PRIORITY
-	unsigned _priority : 8; /* 0..255 */
-#endif
-} P4;
-#define Air4	(sizeof(P4) - 3)
-
-typedef struct P3 { /* liveness1_p1 */
-	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 5; /* proctype */
+	unsigned _t   : 4; /* proctype */
 	unsigned _p   : 7; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
@@ -263,9 +195,9 @@ typedef struct P3 { /* liveness1_p1 */
 } P3;
 #define Air3	(sizeof(P3) - 3)
 
-typedef struct P2 { /* liveness1_p0 */
+typedef struct P2 { /* liveness1_p1 */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 5; /* proctype */
+	unsigned _t   : 4; /* proctype */
 	unsigned _p   : 7; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
@@ -275,7 +207,7 @@ typedef struct P2 { /* liveness1_p0 */
 
 typedef struct P1 { /* safety */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 5; /* proctype */
+	unsigned _t   : 4; /* proctype */
 	unsigned _p   : 7; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
@@ -286,7 +218,7 @@ typedef struct P1 { /* safety */
 #define Puser	((P0 *)_this)
 typedef struct P0 { /* user */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 5; /* proctype */
+	unsigned _t   : 4; /* proctype */
 	unsigned _p   : 7; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
@@ -296,32 +228,32 @@ typedef struct P0 { /* user */
 } P0;
 #define Air0	(sizeof(P0) - Offsetof(P0, k) - 1*sizeof(uchar))
 
-typedef struct P8 { /* np_ */
+typedef struct P4 { /* np_ */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 5; /* proctype */
+	unsigned _t   : 4; /* proctype */
 	unsigned _p   : 7; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
-} P8;
-#define Air8	(sizeof(P8) - 3)
+} P4;
+#define Air4	(sizeof(P4) - 3)
 
 
 #ifndef NOCLAIM
  #ifndef NP
 	#undef VERI
-	#define VERI	9
+	#define VERI	5
  #endif
-	#define Pclaim	P9
+	#define Pclaim	P5
 
-typedef struct P9 {
+typedef struct P5 {
 	unsigned _pid : 8; /* always zero */
-	unsigned _t   : 5; /* active-claim type  */
+	unsigned _t   : 4; /* active-claim type  */
 	unsigned _p   : 7; /* active-claim state */
-	unsigned _n   : 4; /* active-claim index */
+	unsigned _n   : 3; /* active-claim index */
 	uchar c_cur[NCLAIMS]; /* claim-states */
-} P9;
-	#define Air9	(0)
+} P5;
+	#define Air5	(0)
 
 #endif
 #if defined(BFS) && defined(REACH)
@@ -537,15 +469,11 @@ typedef struct TRIX_v6 {
 #define FORWARD_MOVES	"pan.m"
 #define BACKWARD_MOVES	"pan.b"
 #define TRANSITIONS	"pan.t"
-#define _NP_	8
-#define _nstates8	3 /* np_ */
-#define _endstate8	2 /* np_ */
+#define _NP_	4
+#define _nstates4	3 /* np_ */
+#define _endstate4	2 /* np_ */
 
-#define _start8	0 /* np_ */
-#define _start7	5
-#define _start6	5
-#define _start5	5
-#define _start4	5
+#define _start4	0 /* np_ */
 #define _start3	5
 #define _start2	5
 #define _start1	6
@@ -553,7 +481,7 @@ typedef struct TRIX_v6 {
 #ifdef NP
 	#define ACCEPT_LAB	1 /* at least 1 in np_ */
 #else
-	#define ACCEPT_LAB	7 /* user-defined accept labels */
+	#define ACCEPT_LAB	3 /* user-defined accept labels */
 #endif
 #ifdef MEMCNT
 	#ifdef MEMLIM
@@ -909,7 +837,7 @@ void qsend(int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	40
+#define NTRANS	28
 #if defined(BFS_PAR) || NCORE>1
 	void e_critical(int);
 	void x_critical(int);

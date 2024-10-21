@@ -2,7 +2,7 @@
 	default: Uerror("bad return move");
 	case  0: goto R999; /* nothing to undo */
 
-		 /* CLAIM liveness2_p2 */
+		 /* CLAIM liveness2_p1 */
 ;
 		;
 		;
@@ -15,7 +15,7 @@
 		;
 		goto R999;
 
-		 /* CLAIM liveness2_p1 */
+		 /* CLAIM liveness1_p1 */
 ;
 		;
 		;
@@ -28,65 +28,13 @@
 		;
 		goto R999;
 
-		 /* CLAIM liveness2_p0 */
-;
-		;
-		;
-		;
-		
-	case 11: // STATE 13
-		;
-		p_restor(II);
-		;
-		;
-		goto R999;
-
-		 /* CLAIM liveness1_p2 */
-;
-		;
-		;
-		;
-		
-	case 14: // STATE 13
-		;
-		p_restor(II);
-		;
-		;
-		goto R999;
-
-		 /* CLAIM liveness1_p1 */
-;
-		;
-		;
-		;
-		
-	case 17: // STATE 13
-		;
-		p_restor(II);
-		;
-		;
-		goto R999;
-
-		 /* CLAIM liveness1_p0 */
-;
-		;
-		;
-		;
-		
-	case 20: // STATE 13
-		;
-		p_restor(II);
-		;
-		;
-		goto R999;
-
 		 /* CLAIM safety */
 ;
 		
-	case 21: // STATE 1
+	case 9: // STATE 1
 		goto R999;
 
-	case 22: // STATE 10
+	case 10: // STATE 10
 		;
 		p_restor(II);
 		;
@@ -95,7 +43,7 @@
 
 		 /* PROC user */
 
-	case 23: // STATE 1
+	case 11: // STATE 1
 		;
 		((P0 *)_this)->k = trpt->bup.oval;
 		;
@@ -103,25 +51,25 @@
 ;
 		;
 		
-	case 25: // STATE 3
+	case 13: // STATE 3
 		;
 		now.pos[ Index(((P0 *)_this)->_pid, 3) ] = trpt->bup.oval;
 		;
 		goto R999;
 
-	case 26: // STATE 4
+	case 14: // STATE 4
 		;
 		now.step[ Index(((P0 *)_this)->k, 3) ] = trpt->bup.oval;
 		;
 		goto R999;
 
-	case 27: // STATE 5
+	case 15: // STATE 5
 		;
 		((P0 *)_this)->j = trpt->bup.oval;
 		;
 		goto R999;
 
-	case 28: // STATE 7
+	case 16: // STATE 7
 		;
 		((P0 *)_this)->j = trpt->bup.oval;
 		;
@@ -133,19 +81,19 @@
 		;
 		;
 		
-	case 32: // STATE 21
+	case 20: // STATE 21
 		;
 		((P0 *)_this)->j = trpt->bup.oval;
 		;
 		goto R999;
 
-	case 33: // STATE 29
+	case 21: // STATE 29
 		;
 		((P0 *)_this)->k = trpt->bup.oval;
 		;
 		goto R999;
 
-	case 34: // STATE 35
+	case 22: // STATE 35
 		;
 		now.ncrit = trpt->bup.oval;
 		;
@@ -153,13 +101,13 @@
 ;
 		;
 		
-	case 36: // STATE 37
+	case 24: // STATE 37
 		;
 		now.ncrit = trpt->bup.oval;
 		;
 		goto R999;
 
-	case 37: // STATE 38
+	case 25: // STATE 38
 		;
 		now.pos[ Index(((P0 *)_this)->_pid, 3) ] = trpt->bup.oval;
 		;

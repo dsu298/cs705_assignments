@@ -7,59 +7,69 @@ T0_init:
 accept_all:
 	skip
 }
-never liveness1_pid0 {    /* !([] ((! (flag[0])) || ((<> ((ncrit==1))) && ((_pid==0))))) */
+never liveness1_p0 {    /* !([] ((! ((pos[0]>0))) || (<> ((ncrit==1))))) */
 T0_init:
 	do
-	:: (! ((! (flag[0]))) && ! (((ncrit==1)))) -> goto accept_S5
-	:: atomic { (! ((! (flag[0]))) && ! (((_pid==0)))) -> assert(!(! ((! (flag[0]))) && ! (((_pid==0))))) }
+	:: (! ((! ((pos[0]>0)))) && ! (((ncrit==1)))) -> goto accept_S4
 	:: (1) -> goto T0_init
 	od;
-accept_S5:
+accept_S4:
 	do
-	:: (! (((ncrit==1)))) -> goto accept_S5
+	:: (! (((ncrit==1)))) -> goto accept_S4
 	od;
-accept_all:
-	skip
 }
-never liveness1_pid1 {    /* !([] ((! (flag[1])) || ((<> ((ncrit==1))) && ((_pid==1))))) */
+never liveness1_p1 {    /* !([] ((! ((pos[1]>0))) || (<> ((ncrit==1))))) */
 T0_init:
 	do
-	:: (! ((! (flag[1]))) && ! (((ncrit==1)))) -> goto accept_S5
-	:: atomic { (! ((! (flag[1]))) && ! (((_pid==1)))) -> assert(!(! ((! (flag[1]))) && ! (((_pid==1))))) }
+	:: (! ((! ((pos[1]>0)))) && ! (((ncrit==1)))) -> goto accept_S4
 	:: (1) -> goto T0_init
 	od;
-accept_S5:
+accept_S4:
 	do
-	:: (! (((ncrit==1)))) -> goto accept_S5
+	:: (! (((ncrit==1)))) -> goto accept_S4
 	od;
-accept_all:
-	skip
 }
-never liveness2_pid0 {    /* !([] ((! ((flag[0]==0))) || ((<> ((ncrit==1))) && ((_pid==0))))) */
+never liveness1_p2 {    /* !([] ((! ((pos[2]>0))) || (<> ((ncrit==1))))) */
 T0_init:
 	do
-	:: (! ((! ((flag[0]==0)))) && ! (((ncrit==1)))) -> goto accept_S5
-	:: atomic { (! ((! ((flag[0]==0)))) && ! (((_pid==0)))) -> assert(!(! ((! ((flag[0]==0)))) && ! (((_pid==0))))) }
+	:: (! ((! ((pos[2]>0)))) && ! (((ncrit==1)))) -> goto accept_S4
 	:: (1) -> goto T0_init
 	od;
-accept_S5:
+accept_S4:
 	do
-	:: (! (((ncrit==1)))) -> goto accept_S5
+	:: (! (((ncrit==1)))) -> goto accept_S4
 	od;
-accept_all:
-	skip
 }
-never liveness2_pid1 {    /* !([] ((! ((flag[1]==0))) || ((<> ((ncrit==1))) && ((_pid==1))))) */
+never liveness2_p0 {    /* !([] ((! ((pos[0]==0))) || (<> ((ncrit==1))))) */
 T0_init:
 	do
-	:: (! ((! ((flag[1]==0)))) && ! (((ncrit==1)))) -> goto accept_S5
-	:: atomic { (! ((! ((flag[1]==0)))) && ! (((_pid==1)))) -> assert(!(! ((! ((flag[1]==0)))) && ! (((_pid==1))))) }
+	:: (! ((! ((pos[0]==0)))) && ! (((ncrit==1)))) -> goto accept_S4
 	:: (1) -> goto T0_init
 	od;
-accept_S5:
+accept_S4:
 	do
-	:: (! (((ncrit==1)))) -> goto accept_S5
+	:: (! (((ncrit==1)))) -> goto accept_S4
 	od;
-accept_all:
-	skip
+}
+never liveness2_p1 {    /* !([] ((! ((pos[1]==0))) || (<> ((ncrit==1))))) */
+T0_init:
+	do
+	:: (! ((! ((pos[1]==0)))) && ! (((ncrit==1)))) -> goto accept_S4
+	:: (1) -> goto T0_init
+	od;
+accept_S4:
+	do
+	:: (! (((ncrit==1)))) -> goto accept_S4
+	od;
+}
+never liveness2_p2 {    /* !([] ((! ((pos[2]==0))) || (<> ((ncrit==1))))) */
+T0_init:
+	do
+	:: (! ((! ((pos[2]==0)))) && ! (((ncrit==1)))) -> goto accept_S4
+	:: (1) -> goto T0_init
+	od;
+accept_S4:
+	do
+	:: (! (((ncrit==1)))) -> goto accept_S4
+	od;
 }
